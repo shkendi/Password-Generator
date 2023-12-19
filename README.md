@@ -61,6 +61,8 @@ Satisfies all of the above acceptance criteria plus the following:
 
 1. Created a function to prompt user for password options.
 
+![Alt text](images/passwordChoice.png)
+
 function getPasswordOptions() {
 var length = parseInt(
 prompt('Enter the length of the password (between 8 and 128 characters)')
@@ -68,13 +70,15 @@ prompt('Enter the length of the password (between 8 and 128 characters)')
 
 2. Validated password length based on the given conditions.
 
-   while (isNaN(length) || length < 8 || length > 128) {
-   length = parseInt(
-   prompt(
-   'Invalid length! Please enter a length between 8 and 128 characters'
-   )
-   )
-   }
+![Alt text](images/passwordLength.png)
+
+while (isNaN(length) || length < 8 || length > 128) {
+length = parseInt(
+prompt(
+'Invalid length! Please enter a length between 8 and 128 characters'
+)
+)
+}
 
 - The user is prompted to options and after confirming their choice, the password generated would have to include user's choice.
 
@@ -166,6 +170,8 @@ var passwordText = document.querySelector('#password')
 
 passwordText.value = password
 }
+
+![Alt text](images/password.png)
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword)
