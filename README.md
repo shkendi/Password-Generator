@@ -59,21 +59,24 @@ Satisfies all of the above acceptance criteria plus the following:
 
 - Based on the instructions, and on the initial code I have been provided on the script.js file, I followed the given instructions in order as below:
 
-1. Created a function to prompt user for password options
+1. Created a function to prompt user for password options.
 
 function getPasswordOptions() {
 var length = parseInt(
 prompt('Enter the length of the password (between 8 and 128 characters)')
 )
 
-// Validate password length
-while (isNaN(length) || length < 8 || length > 128) {
-length = parseInt(
-prompt(
-'Invalid length! Please enter a length between 8 and 128 characters'
-)
-)
-}
+2. Validated password length based on the given conditions.
+
+   while (isNaN(length) || length < 8 || length > 128) {
+   length = parseInt(
+   prompt(
+   'Invalid length! Please enter a length between 8 and 128 characters'
+   )
+   )
+   }
+
+- The user is prompted to options and after confirming their choice, the password generated would have to include user's choice.
 
 var lowerCaseCharacters = confirm('Include lowercase characters?')
 var upperCaseCharacters = confirm('Include uppercase characters?')
@@ -101,11 +104,72 @@ includeUpperCaseCharacters: upperCaseCharacters,
 }
 }
 
-![Alt text](<images/Screenshot 2023-12-19 at 14.37.33.png>)
+3. Created the function for getting a random element from an array.
 
-I then started getting the data of the given array such as the number of months. I console loged everything step by step to check if I got the right result. ![Alt text](<Screenshot 2023-12-10 at 21.26.51.png>)
+function getRandom(arr) {
+var randomIndex = Math.floor(Math.random() \* arr.length)
+return arr[randomIndex]
+}
 
-const totalMonths = finances.length
+4. Created a function to generate password with user input.
 
-3. Next, I found the total amount of profits/loses over the entire period using the .reduce method to calculate the sum of all numbers in the array.
-   The reduce() method starts from the first element of the array (or the initial value if provided) and iterates through each element of the array. The accumulator starts at 0 (zero). Console log the result to check if there are any errors showing.
+function generatePassword() {
+var options = getPasswordOptions()
+var password = ''
+password +=
+upperCasedCharacters[
+Math.floor(Math.random() * upperCasedCharacters.length)
+]
+password +=
+lowerCasedCharacters[
+Math.floor(Math.random() * lowerCasedCharacters.length)
+]
+password +=
+numericCharacters[Math.floor(Math.random() * numericCharacters.length)]
+password +=
+specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
+
+var availableChars = []
+var generatePassword = ''
+
+if (options.includeSpecial) {
+availableChars = availableChars.concat(specialCharacters)
+}
+if (options.includeNumeric) {
+availableChars = availableChars.concat(numericCharacters)
+}
+if (options.includeLowerCase) {
+availableChars = availableChars.concat(lowerCasedCharacters)
+}
+if (options.includeUpperCase) {
+availableChars = availableChars.concat(upperCasedCharacters)
+}
+
+console.log(availableChars)
+
+for (var i = 0; i < options.pwLen; i++) {
+var randomChar = getRandom(availableChars)
+generatePassword += randomChar
+}
+
+// alert('Generated Password: ' + generatePassword)
+
+return generatePassword
+}
+
+5. Created a function to write the password input and added it to the eventListener so it could be executed to the browser.
+
+function writePassword() {
+var password = generatePassword()
+console.log(password)
+var passwordText = document.querySelector('#password')
+
+passwordText.value = password
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword)
+
+6. I added a README file.
+
+7. Deployed the project to the GitHub pages.
